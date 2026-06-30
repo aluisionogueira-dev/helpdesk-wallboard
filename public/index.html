@@ -388,7 +388,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Tickets abertos</div>
-        <div class="kpi-valor">8</div>
+        <div class="kpi-valor" id="hd-kpi-abertos">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -397,7 +397,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Aguardando retorno</div>
-        <div class="kpi-valor" style="color:var(--red)">1</div>
+        <div class="kpi-valor" style="color:var(--red)" id="hd-kpi-aguardando">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -406,7 +406,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Em atendimento</div>
-        <div class="kpi-valor">5</div>
+        <div class="kpi-valor" id="hd-kpi-atendimento">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -414,13 +414,8 @@ tr.row-crit:last-child td { border-bottom: none; }
         <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B45" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
       <div>
-        <div class="kpi-label">Resolvidos · mês</div>
-        <div class="kpi-valor">142<span class="unit">/146</span>
-          <span class="trend up">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg>
-            4%
-          </span>
-        </div>
+        <div class="kpi-label">Retorno terceiro</div>
+        <div class="kpi-valor" id="hd-kpi-terceiro">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -428,8 +423,8 @@ tr.row-crit:last-child td { border-bottom: none; }
         <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2"><path d="M3 17h4v4H3zM10 11h4v10h-4zM17 5h4v16h-4z"/></svg>
       </div>
       <div>
-        <div class="kpi-label">SLA cumprido</div>
-        <div class="kpi-valor">96<span class="unit">%</span></div>
+        <div class="kpi-label">Total na fila</div>
+        <div class="kpi-valor" id="hd-kpi-total">—</div>
       </div>
     </div>
   </div>
@@ -441,7 +436,7 @@ tr.row-crit:last-child td { border-bottom: none; }
     <div class="panel">
       <div class="panel-header">
         <h2>Fila ativa</h2>
-        <span class="count">8 tickets</span>
+        <span class="count" id="hd-count">— tickets</span>
       </div>
       <table>
         <thead>
@@ -453,71 +448,11 @@ tr.row-crit:last-child td { border-bottom: none; }
             <th style="width:90px;">Aberto há</th>
           </tr>
         </thead>
-        <tbody id="queue-page-1">
-          <tr>
-            <td class="ticket-id">TKT-1378</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Criação de regra contábil — retenções de impostos</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging">2 dias</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TKT-1380</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Exclusão de ordem de compra</td>
-            <td>—</td>
-            <td><span class="badge badge-aberto">Aberto</span></td>
-            <td class="aging">3 dias</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TKT-1361</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Instalação de certificado digital</td>
-            <td>Aluisio Nogueira</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging">4 dias</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TKT-1377</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Impressora engatando papel — sala de operações</td>
-            <td>Wotyson Neves</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging">5 dias</td>
-          </tr>
-        </tbody>
-        <tbody id="queue-page-2" style="display:none;">
-          <tr>
-            <td class="ticket-id">TKT-1370</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Verificação de impressoras coloridas</td>
-            <td>Wotyson Neves</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging warn">8 dias</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TKT-1367</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Instalação de certificados</td>
-            <td>Aluisio Nogueira</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging warn">9 dias</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TKT-1358</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Erro no retorno bancário — Amazon filial</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-terceiro">Retorno terceiro</span></td>
-            <td class="aging crit">14 dias</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TKT-1356</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Certificado digital Amazon</td>
-            <td>Wotyson · Aluisio</td>
-            <td><span class="badge badge-atendimento">Em atendimento</span></td>
-            <td class="aging warn">10 dias</td>
-          </tr>
+        <tbody id="hd-tbody">
+          <tr><td colspan="5" style="text-align:center; color:var(--text3); padding:30px;">Carregando dados do ClickUp…</td></tr>
         </tbody>
       </table>
-      <div class="panel-footer">
-        <span class="page-dot active" data-page="1"></span>
-        <span class="page-dot" data-page="2"></span>
-      </div>
+      <div class="panel-footer" id="hd-page-dots"></div>
     </div>
 
     <!-- lateral -->
@@ -527,38 +462,8 @@ tr.row-crit:last-child td { border-bottom: none; }
         <div class="panel-header">
           <h2>Por status</h2>
         </div>
-        <div class="status-list">
-          <div>
-            <div class="status-row">
-              <span class="label"><span class="dot" style="background:var(--gray)"></span>Aberto</span>
-              <span class="val">1</span>
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--gray)"></div></div>
-          </div>
-          <div>
-            <div class="status-row">
-              <span class="label"><span class="dot" style="background:var(--accent)"></span>Em atendimento</span>
-              <span class="val">5</span>
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:62%; background:var(--accent)"></div></div>
-          </div>
-          <div>
-            <div class="status-row">
-              <span class="label"><span class="dot" style="background:var(--red)"></span>Aguardando retorno</span>
-              <span class="val">0</span>
-            </div>
-            <div class="empty-ok" style="margin-top:6px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
-              Nenhum chamado parado
-            </div>
-          </div>
-          <div>
-            <div class="status-row">
-              <span class="label"><span class="dot" style="background:var(--amber)"></span>Retorno terceiro</span>
-              <span class="val">1</span>
-            </div>
-            <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--amber)"></div></div>
-          </div>
+        <div class="status-list" id="hd-status-list">
+          <span style="color:var(--text3); font-size:13px;">Carregando…</span>
         </div>
       </div>
 
@@ -566,28 +471,8 @@ tr.row-crit:last-child td { border-bottom: none; }
         <div class="panel-header">
           <h2>Equipe</h2>
         </div>
-        <div class="team-list">
-          <div class="team-row">
-            <span class="who">
-              <span class="team-avatar">AN</span>
-              <span class="name">Aluisio Nogueira</span>
-            </span>
-            <span class="val">3</span>
-          </div>
-          <div class="team-row">
-            <span class="who">
-              <span class="team-avatar">WN</span>
-              <span class="name">Wotyson Neves</span>
-            </span>
-            <span class="val">3</span>
-          </div>
-          <div class="team-row">
-            <span class="who">
-              <span class="team-avatar">VC</span>
-              <span class="name">Vinicius Cavalcante</span>
-            </span>
-            <span class="val">2</span>
-          </div>
+        <div class="team-list" id="hd-team-list">
+          <span style="color:var(--text3); font-size:13px; padding:0 24px;">Carregando…</span>
         </div>
       </div>
 
@@ -597,7 +482,7 @@ tr.row-crit:last-child td { border-bottom: none; }
 
 <footer>
   <span class="mark"><span class="live-dot"></span>Helpdesk T.I. · Grupo VDA</span>
-  <span class="update">Dados de exemplo · próxima atualização em 60s</span>
+  <span class="update" id="hd-update">Conectando ao ClickUp…</span>
 </footer>
 
 </section>
@@ -624,7 +509,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Atividades abertas</div>
-        <div class="kpi-valor">50</div>
+        <div class="kpi-valor" id="atv-kpi-abertas">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -633,7 +518,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Atrasadas</div>
-        <div class="kpi-valor" style="color:var(--red)">17</div>
+        <div class="kpi-valor" style="color:var(--red)" id="atv-kpi-atrasadas">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -642,7 +527,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Alta · urgente</div>
-        <div class="kpi-valor">9</div>
+        <div class="kpi-valor" id="atv-kpi-alta">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -651,7 +536,7 @@ tr.row-crit:last-child td { border-bottom: none; }
       </div>
       <div>
         <div class="kpi-label">Tag "pra hoje"</div>
-        <div class="kpi-valor">5</div>
+        <div class="kpi-valor" id="atv-kpi-hoje">—</div>
       </div>
     </div>
     <div class="kpi-card">
@@ -659,8 +544,8 @@ tr.row-crit:last-child td { border-bottom: none; }
         <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B45" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
       </div>
       <div>
-        <div class="kpi-label">Finalizado · mês</div>
-        <div class="kpi-valor">31</div>
+        <div class="kpi-label">Itens em destaque</div>
+        <div class="kpi-valor" id="atv-kpi-relevantes">—</div>
       </div>
     </div>
   </div>
@@ -670,7 +555,7 @@ tr.row-crit:last-child td { border-bottom: none; }
     <div class="panel">
       <div class="panel-header">
         <h2>Prioridades e atrasos</h2>
-        <span class="count">19 itens · página <span id="atv-page-label">1</span>/4</span>
+        <span class="count" id="atv-count">— itens</span>
       </div>
       <table>
         <thead>
@@ -682,154 +567,11 @@ tr.row-crit:last-child td { border-bottom: none; }
             <th style="width:110px;">Venceu em</th>
           </tr>
         </thead>
-        <tbody id="atv-page-1">
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-392</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Indicador — operação fluvial<span class="tag-pill today">pra hoje</span></td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/05</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-372</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar view para indicadores de produção — OEE</td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/05</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-345</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar painel para controlar a ocupação de frotas</td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/05</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-340</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Identificar horas não produtivas da tripulação</td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/05</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-324</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Confrontar AFRMM do CargasWeb com lançado no Sankhya</td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/05</td>
-          </tr>
-        </tbody>
-        <tbody id="atv-page-2" style="display:none;">
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-944</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar procedimento para uso de IA corporativo</td>
-            <td>Aluisio Nogueira</td>
-            <td><span class="badge badge-aberto">Aberto</span></td>
-            <td class="aging crit">01/06</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-956</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Melhoria de processo — rodoviário V2</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">02/06</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-851</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Solicitação de criação de relatório de endividamento</td>
-            <td>Joshua Carvalho</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">11/06</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-939</td>
-            <td class="ticket-title"><span class="priority-dot priority-urgent"></span>Autoatendimento AMLABS — prestação de contas<span class="tag-pill today">pra hoje</span></td>
-            <td>Vinicius · Aluisio</td>
-            <td><span class="badge badge-andamento">Em andamento</span></td>
-            <td class="aging crit">15/06</td>
-          </tr>
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-246</td>
-            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Controle de portaria</td>
-            <td>Aluisio · Vinicius</td>
-            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
-            <td class="aging crit">22/06</td>
-          </tr>
-        </tbody>
-        <tbody id="atv-page-3" style="display:none;">
-          <tr class="row-crit">
-            <td class="ticket-id">TICKET-234</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Envio de e-mail para cotação de fornecedores</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging crit">23/06</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-965</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Atualização de certificados digitais<span class="tag-pill">importante</span></td>
-            <td>Aluisio Nogueira</td>
-            <td><span class="badge badge-andamento">Em andamento</span></td>
-            <td class="aging warn">25/06</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-963</td>
-            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Levantamento de material — almoxarifado</td>
-            <td>Aluisio Nogueira</td>
-            <td><span class="badge badge-andamento">Em andamento</span></td>
-            <td class="aging warn">26/06</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-368</td>
-            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Bonificação | cashback — Gelocrim<span class="tag-pill">lembrete-1h</span></td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td class="aging warn">29/06</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-325</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Módulo de processo trabalhista — pessoal+</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
-            <td class="aging warn">29/06</td>
-          </tr>
-        </tbody>
-        <tbody id="atv-page-4" style="display:none;">
-          <tr>
-            <td class="ticket-id">TICKET-236</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Verificar o MANAD</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
-            <td class="aging warn">29/06</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-943</td>
-            <td class="ticket-title"><span class="priority-dot priority-high"></span>Migração de servidor — Datacom para 2COM<span class="tag-pill today">pra hoje</span></td>
-            <td>Aluisio · Edgard</td>
-            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
-            <td>03/07</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-928</td>
-            <td class="ticket-title"><span class="priority-dot priority-urgent"></span>Ajustar ICMS no faturamento — Gelo e Navecunha</td>
-            <td>Vinicius Cavalcante</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td>06/07</td>
-          </tr>
-          <tr>
-            <td class="ticket-id">TICKET-953</td>
-            <td class="ticket-title"><span class="priority-dot priority-none"></span>Dash consolidador — manutenção<span class="tag-pill today">pra hoje</span></td>
-            <td>Edgard Alecrim</td>
-            <td><span class="badge badge-pendente">Pendente</span></td>
-            <td>—</td>
-          </tr>
+        <tbody id="atv-tbody">
+          <tr><td colspan="5" style="text-align:center; color:var(--text3); padding:30px;">Carregando dados do ClickUp…</td></tr>
         </tbody>
       </table>
-      <div class="panel-footer">
-        <span class="page-dot-atv active" data-page="1"></span>
-        <span class="page-dot-atv" data-page="2"></span>
-        <span class="page-dot-atv" data-page="3"></span>
-        <span class="page-dot-atv" data-page="4"></span>
-      </div>
+      <div class="panel-footer" id="atv-page-dots"></div>
     </div>
 
   </div>
@@ -837,7 +579,7 @@ tr.row-crit:last-child td { border-bottom: none; }
 
 <footer>
   <span class="mark"><span class="live-dot"></span>Atividades T.I. · Grupo VDA</span>
-  <span class="update">Filtro: alta/urgente · pra hoje · atrasadas — dados de exemplo</span>
+  <span class="update" id="atv-update">Filtro: alta/urgente · pra hoje · atrasadas</span>
 </footer>
 
 </section>
@@ -854,25 +596,176 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000 * 30);
 
-function setupPagination(pageIds, dotSelector, intervalMs) {
-  const pages = pageIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
-  const dots = document.querySelectorAll(dotSelector);
-  if (pages.length <= 1) return;
+/* ---------- helpers de paginação genérica em runtime ---------- */
+function buildPagination(containerId, items, perPage, renderRowFn, dotsContainerId, intervalMs, emptyMsg) {
+  const tbody = document.getElementById(containerId);
+  const dotsEl = document.getElementById(dotsContainerId);
+  tbody.innerHTML = '';
+  if (dotsEl) dotsEl.innerHTML = '';
+
+  if (!items || items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--text3); padding:30px;">' + (emptyMsg || 'Nenhum item encontrado.') + '</td></tr>';
+    return null;
+  }
+
+  const pages = [];
+  for (let i = 0; i < items.length; i += perPage) {
+    pages.push(items.slice(i, i + perPage));
+  }
+
+  pages.forEach(function (pageItems, idx) {
+    const rows = pageItems.map(renderRowFn).join('');
+    const wrap = document.createElement('tbody');
+    wrap.id = containerId + '-p' + idx;
+    wrap.style.display = idx === 0 ? '' : 'none';
+    wrap.innerHTML = rows;
+    tbody.parentNode.insertBefore(wrap, tbody);
+    if (dotsEl && pages.length > 1) {
+      const dot = document.createElement('span');
+      dot.className = 'page-dot-atv' + (idx === 0 ? ' active' : '');
+      dotsEl.appendChild(dot);
+    }
+  });
+  tbody.remove();
+
+  if (pages.length <= 1) return null;
+
   let current = 0;
-  setInterval(function () {
-    pages[current].style.display = 'none';
-    if (dots[current]) dots[current].classList.remove('active');
-    current = (current + 1) % pages.length;
-    pages[current].style.display = '';
-    if (dots[current]) dots[current].classList.add('active');
-    const label = document.getElementById('atv-page-label');
-    if (label && pageIds[0].startsWith('atv')) label.textContent = current + 1;
+  const pageEls = pages.map(function (_, idx) { return document.getElementById(containerId + '-p' + idx); });
+  const dotEls = dotsEl ? dotsEl.querySelectorAll('.page-dot-atv') : [];
+  return setInterval(function () {
+    pageEls[current].style.display = 'none';
+    if (dotEls[current]) dotEls[current].classList.remove('active');
+    current = (current + 1) % pageEls.length;
+    pageEls[current].style.display = '';
+    if (dotEls[current]) dotEls[current].classList.add('active');
   }, intervalMs);
 }
 
-setupPagination(['queue-page-1','queue-page-2'], '.page-dot', 8000);
-setupPagination(['atv-page-1','atv-page-2','atv-page-3','atv-page-4'], '.page-dot-atv', 6000);
+let hdPaginationTimer = null;
+let atvPaginationTimer = null;
 
+/* ---------- Helpdesk ---------- */
+function renderHelpdeskRow(t) {
+  const aging = t.agingDays === null ? '—' : t.agingDays + (t.agingDays === 1 ? ' dia' : ' dias');
+  const agingCls = 'aging' + (t.agingClass ? ' ' + t.agingClass : '');
+  const rowCls = t.agingClass === 'crit' ? ' class="row-crit"' : '';
+  const assignee = t.assignees.length ? t.assignees.join(' · ') : '—';
+  return '<tr' + rowCls + '>' +
+    '<td class="ticket-id">' + t.id + '</td>' +
+    '<td class="ticket-title"><span class="priority-dot ' + t.priorityClass + '"></span>' + t.name + '</td>' +
+    '<td>' + assignee + '</td>' +
+    '<td><span class="badge ' + t.statusClass + '">' + t.statusLabel + '</span></td>' +
+    '<td class="' + agingCls + '">' + aging + '</td>' +
+    '</tr>';
+}
+
+function renderHelpdeskStatus(statusCounts, total) {
+  const order = [
+    { key: 'aberto', label: 'Aberto', color: 'var(--gray)' },
+    { key: 'em atendimento', label: 'Em atendimento', color: 'var(--accent)' },
+    { key: 'aguardando retorno', label: 'Aguardando retorno', color: 'var(--red)' },
+    { key: 'retorno terceiro', label: 'Retorno terceiro', color: 'var(--amber)' }
+  ];
+  const el = document.getElementById('hd-status-list');
+  el.innerHTML = order.map(function (o) {
+    const count = statusCounts[o.key] || 0;
+    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+    if (o.key === 'aguardando retorno' && count === 0) {
+      return '<div><div class="status-row"><span class="label"><span class="dot" style="background:' + o.color + '"></span>' + o.label + '</span><span class="val">0</span></div>' +
+        '<div class="empty-ok" style="margin-top:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Nenhum chamado parado</div></div>';
+    }
+    return '<div><div class="status-row"><span class="label"><span class="dot" style="background:' + o.color + '"></span>' + o.label + '</span><span class="val">' + count + '</span></div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%; background:' + o.color + '"></div></div></div>';
+  }).join('');
+}
+
+function renderHelpdeskTeam(assigneeCounts) {
+  const el = document.getElementById('hd-team-list');
+  const names = Object.keys(assigneeCounts).sort(function (a, b) { return assigneeCounts[b] - assigneeCounts[a]; });
+  if (names.length === 0) {
+    el.innerHTML = '<span style="color:var(--text3); font-size:13px; padding:0 24px;">Sem responsáveis atribuídos.</span>';
+    return;
+  }
+  el.innerHTML = names.map(function (name) {
+    const initials = name.split(' ').map(function (p) { return p[0]; }).slice(0, 2).join('').toUpperCase();
+    return '<div class="team-row"><span class="who"><span class="team-avatar">' + initials + '</span><span class="name">' + name + '</span></span><span class="val">' + assigneeCounts[name] + '</span></div>';
+  }).join('');
+}
+
+async function loadHelpdesk() {
+  try {
+    const res = await fetch('/api/helpdesk-data');
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    document.getElementById('hd-kpi-abertos').textContent = data.statusCounts['aberto'] || 0;
+    document.getElementById('hd-kpi-aguardando').textContent = data.statusCounts['aguardando retorno'] || 0;
+    document.getElementById('hd-kpi-atendimento').textContent = data.statusCounts['em atendimento'] || 0;
+    document.getElementById('hd-kpi-terceiro').textContent = data.statusCounts['retorno terceiro'] || 0;
+    document.getElementById('hd-kpi-total').textContent = data.total;
+    document.getElementById('hd-count').textContent = data.total + (data.total === 1 ? ' ticket' : ' tickets');
+
+    renderHelpdeskStatus(data.statusCounts, data.total);
+    renderHelpdeskTeam(data.assigneeCounts);
+
+    if (hdPaginationTimer) clearInterval(hdPaginationTimer);
+    hdPaginationTimer = buildPagination('hd-tbody', data.tasks, 4, renderHelpdeskRow, 'hd-page-dots', 8000, 'Nenhum ticket na fila. Tudo certo por aqui.');
+
+    const updated = new Date(data.updatedAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('hd-update').innerHTML = '<span class="live-dot" style="margin-right:6px;"></span>Atualizado às ' + updated;
+  } catch (err) {
+    document.getElementById('hd-update').textContent = 'Erro ao buscar dados do ClickUp — tentando novamente em breve.';
+  }
+}
+
+/* ---------- Atividades ---------- */
+function renderAtividadesRow(t) {
+  const tagPra = t.isToday ? '<span class="tag-pill today">pra hoje</span>' : '';
+  const otherTags = (t.tags || []).filter(function (tg) { return tg !== 'pra hoje'; })
+    .map(function (tg) { return '<span class="tag-pill">' + tg + '</span>'; }).join('');
+  const rowCls = t.agingClass === 'crit' ? ' class="row-crit"' : '';
+  const dueCls = 'aging' + (t.agingClass ? ' ' + t.agingClass : '');
+  const assignee = t.assignees.length ? t.assignees.join(' · ') : '—';
+  return '<tr' + rowCls + '>' +
+    '<td class="ticket-id">' + t.id + '</td>' +
+    '<td class="ticket-title"><span class="priority-dot ' + t.priorityClass + '"></span>' + t.name + tagPra + otherTags + '</td>' +
+    '<td>' + assignee + '</td>' +
+    '<td><span class="badge ' + t.statusClass + '">' + t.statusLabel + '</span></td>' +
+    '<td class="' + dueCls + '">' + t.dueLabel + '</td>' +
+    '</tr>';
+}
+
+async function loadAtividades() {
+  try {
+    const res = await fetch('/api/atividades-data');
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    document.getElementById('atv-kpi-abertas').textContent = data.totalOpen;
+    document.getElementById('atv-kpi-atrasadas').textContent = data.lateCount;
+    document.getElementById('atv-kpi-alta').textContent = data.highPriorityCount;
+    document.getElementById('atv-kpi-hoje').textContent = data.todayCount;
+    document.getElementById('atv-kpi-relevantes').textContent = data.totalRelevant;
+    document.getElementById('atv-count').textContent = data.totalRelevant + (data.totalRelevant === 1 ? ' item' : ' itens');
+
+    if (atvPaginationTimer) clearInterval(atvPaginationTimer);
+    atvPaginationTimer = buildPagination('atv-tbody', data.tasks, 5, renderAtividadesRow, 'atv-page-dots', 6000, 'Nenhuma atividade prioritária, atrasada ou marcada para hoje.');
+
+    const updated = new Date(data.updatedAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('atv-update').innerHTML = '<span class="live-dot" style="margin-right:6px;"></span>Atualizado às ' + updated;
+  } catch (err) {
+    document.getElementById('atv-update').textContent = 'Erro ao buscar dados do ClickUp — tentando novamente em breve.';
+  }
+}
+
+/* ---------- carga inicial + polling periódico ---------- */
+loadHelpdesk();
+loadAtividades();
+setInterval(loadHelpdesk, 45000);
+setInterval(loadAtividades, 45000);
+
+/* ---------- alternância de telas ---------- */
 (function () {
   const screens = [
     document.getElementById('screen-helpdesk'),
