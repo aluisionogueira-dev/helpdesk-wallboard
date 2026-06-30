@@ -886,6 +886,13 @@ setupPagination(['atv-page-1','atv-page-2','atv-page-3','atv-page-4'], '.page-do
     screens[current].classList.add('active');
   }, 60000);
 })();
+
+/* Auto-reload: garante que a TV sempre rode a versão mais recente
+   publicada no GitHub/Vercel, sem precisar atualizar manualmente.
+   Recarrega a cada 30 minutos. */
+setTimeout(function () {
+  window.location.reload();
+}, 30 * 60 * 1000);
 </script>
 
 </body>
