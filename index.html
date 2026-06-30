@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Helpdesk T.I. — Navecunha</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F8F9FC;
+  --surface: #FFFFFF;
+  --surface2: #F3F4F8;
+  --border: #E4E6EF;
+  --border2: #D0D3E2;
+  --text: #1A1D2E;
+  --text2: #5A5F7A;
+  --text3: #9095B0;
+
+  --accent: #6C63FF;
+  --accent-bg: #F0EFFE;
+  --accent-dark: #5047CC;
+
+  --green: #1A6B45;
+  --green-bg: #E8F5EE;
+  --amber: #9A6500;
+  --amber-bg: #FFF8E8;
+  --red: #C0392B;
+  --red-bg: #FDECEA;
+  --gray: #5A5F7A;
+  --gray-bg: #F0F1F5;
+
+  --shadow: 0 2px 8px rgba(108,99,255,0.07), 0 1px 3px rgba(0,0,0,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+header {
+  background: var(--accent);
+  padding: 26px 48px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .header-left h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+header .header-left p {
+  margin-top: 5px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.5px;
+}
+header .clock {
+  text-align: right;
+}
+header .clock .time {
+  font-family: 'DM Mono', monospace;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+}
+header .clock .date {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.5px;
+}
+
+.main {
+  padding: 24px 48px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: calc(100vh - 96px);
+}
+
+/* === KPIs === */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.kpi-icon {
+  width: 42px; height: 42px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.kpi-icon svg { width: 22px; height: 22px; }
+.kpi-icon.accent { background: var(--accent-bg); }
+.kpi-icon.amber { background: var(--amber-bg); }
+.kpi-icon.green { background: var(--green-bg); }
+.kpi-icon.gray { background: var(--gray-bg); }
+.kpi-label {
+  font-size: 12px;
+  color: var(--text3);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.kpi-valor {
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+  font-size: 30px;
+  color: var(--text);
+  line-height: 1;
+}
+.kpi-valor .unit {
+  font-size: 14px;
+  color: var(--text3);
+  font-family: 'Inter', sans-serif;
+  margin-left: 3px;
+}
+
+/* === corpo === */
+.body-row {
+  display: grid;
+  grid-template-columns: 2.1fr 1fr;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.panel-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.panel-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+.panel-header .count {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text3);
+  background: var(--surface2);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 11px 22px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+tbody td {
+  padding: 13px 22px;
+  font-size: 15px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:last-child td { border-bottom: none; }
+td.ticket-id { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text3); }
+td.ticket-title { font-weight: 500; }
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge-aberto { background: var(--gray-bg); color: var(--gray); }
+.badge-atendimento { background: var(--accent-bg); color: var(--accent-dark); }
+.badge-aguardando { background: var(--red-bg); color: var(--red); }
+.badge-terceiro { background: var(--amber-bg); color: var(--amber); }
+.badge-concluido { background: var(--green-bg); color: var(--green); }
+
+.priority-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 9px;
+  vertical-align: middle;
+}
+.priority-urgent { background: var(--red); }
+.priority-high { background: var(--amber); }
+.priority-normal { background: var(--text3); }
+.priority-none { background: var(--border2); }
+
+/* lateral */
+.status-list { padding: 18px 24px; display: flex; flex-direction: column; gap: 14px; }
+.status-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.status-row .label { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--text2); font-weight: 500; }
+.status-row .dot { width: 10px; height: 10px; border-radius: 50%; }
+.status-row .val { font-family: 'DM Mono', monospace; font-size: 19px; color: var(--text); font-weight: 500; }
+.bar-track { height: 6px; background: var(--surface2); border-radius: 3px; margin-top: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; }
+
+.team-list { padding: 4px 24px 18px; display: flex; flex-direction: column; }
+.team-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-top: 1px solid var(--border); }
+.team-row:first-child { border-top: none; }
+.team-row .who { display: flex; align-items: center; gap: 10px; }
+.team-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent-dark);
+  font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.team-row .name { font-size: 14px; color: var(--text); font-weight: 500; }
+.team-row .val { font-family: 'DM Mono', monospace; font-size: 15px; color: var(--text2); }
+
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 12px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+}
+footer .mark {
+  font-size: 12px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+footer .update {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text3);
+}
+.live-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* tempo aberto */
+.aging {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--text2);
+}
+.aging.warn { color: var(--amber); font-weight: 500; }
+.aging.crit { color: var(--red); font-weight: 600; }
+
+/* linha critica destacada */
+tr.row-crit { background: var(--red-bg); }
+tr.row-crit td { border-bottom: 1px solid #F5D5D0; }
+tr.row-crit:last-child td { border-bottom: none; }
+
+/* tendencia no KPI */
+.trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+.trend.up { background: var(--green-bg); color: var(--green); }
+.trend.down { background: var(--red-bg); color: var(--red); }
+.trend svg { width: 11px; height: 11px; }
+
+/* paginacao da fila */
+.panel-footer {
+  padding: 10px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+}
+.page-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--border2);
+  transition: background 0.3s;
+}
+.page-dot.active { background: var(--accent); }
+.page-dot-atv {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--border2);
+  transition: background 0.3s;
+}
+.page-dot-atv.active { background: var(--accent); }
+
+/* estado vazio */
+.empty-ok {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--green-bg);
+  border-radius: 8px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 500;
+}
+.empty-ok svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* alternancia de telas */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* badges status Atividades */
+.badge-pendente { background: var(--amber-bg); color: var(--amber); }
+.badge-andamento { background: var(--accent-bg); color: var(--accent-dark); }
+.badge-ag-usuario { background: var(--red-bg); color: var(--red); }
+
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--gray-bg);
+  color: var(--text2);
+  margin-left: 8px;
+}
+.tag-pill.today { background: var(--accent-bg); color: var(--accent-dark); }
+</style>
+</head>
+<body>
+
+<section class="screen active" id="screen-helpdesk">
+
+<header>
+  <div class="header-left">
+    <h1>Helpdesk T.I.</h1>
+    <p>Navecunha · Grupo VDA · Painel operacional</p>
+  </div>
+  <div class="clock">
+    <div class="time" id="clock-time">14:32</div>
+    <div class="date" id="clock-date">Terça, 30 de junho</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- KPIs -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-icon accent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2"><path d="M9 11H5a2 2 0 0 0-2 2v7a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-7a2 2 0 0 0-2-2h-4M9 11V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6M9 11h6"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Tickets abertos</div>
+        <div class="kpi-valor">8</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:var(--red-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Aguardando retorno</div>
+        <div class="kpi-valor" style="color:var(--red)">1</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9A6500" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Em atendimento</div>
+        <div class="kpi-valor">5</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B45" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Resolvidos · mês</div>
+        <div class="kpi-valor">142<span class="unit">/146</span>
+          <span class="trend up">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 15l7-7 7 7"/></svg>
+            4%
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon accent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2"><path d="M3 17h4v4H3zM10 11h4v10h-4zM17 5h4v16h-4z"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">SLA cumprido</div>
+        <div class="kpi-valor">96<span class="unit">%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- corpo -->
+  <div class="body-row">
+
+    <!-- fila -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Fila ativa</h2>
+        <span class="count">8 tickets</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:90px;">Ticket</th>
+            <th>Assunto</th>
+            <th style="width:160px;">Responsável</th>
+            <th style="width:150px;">Status</th>
+            <th style="width:90px;">Aberto há</th>
+          </tr>
+        </thead>
+        <tbody id="queue-page-1">
+          <tr>
+            <td class="ticket-id">TKT-1378</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Criação de regra contábil — retenções de impostos</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging">2 dias</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TKT-1380</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Exclusão de ordem de compra</td>
+            <td>—</td>
+            <td><span class="badge badge-aberto">Aberto</span></td>
+            <td class="aging">3 dias</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TKT-1361</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Instalação de certificado digital</td>
+            <td>Aluisio Nogueira</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging">4 dias</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TKT-1377</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Impressora engatando papel — sala de operações</td>
+            <td>Wotyson Neves</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging">5 dias</td>
+          </tr>
+        </tbody>
+        <tbody id="queue-page-2" style="display:none;">
+          <tr>
+            <td class="ticket-id">TKT-1370</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Verificação de impressoras coloridas</td>
+            <td>Wotyson Neves</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging warn">8 dias</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TKT-1367</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Instalação de certificados</td>
+            <td>Aluisio Nogueira</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging warn">9 dias</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TKT-1358</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Erro no retorno bancário — Amazon filial</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-terceiro">Retorno terceiro</span></td>
+            <td class="aging crit">14 dias</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TKT-1356</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Certificado digital Amazon</td>
+            <td>Wotyson · Aluisio</td>
+            <td><span class="badge badge-atendimento">Em atendimento</span></td>
+            <td class="aging warn">10 dias</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="panel-footer">
+        <span class="page-dot active" data-page="1"></span>
+        <span class="page-dot" data-page="2"></span>
+      </div>
+    </div>
+
+    <!-- lateral -->
+    <div style="display:flex; flex-direction:column; gap:20px; min-height:0;">
+
+      <div class="panel">
+        <div class="panel-header">
+          <h2>Por status</h2>
+        </div>
+        <div class="status-list">
+          <div>
+            <div class="status-row">
+              <span class="label"><span class="dot" style="background:var(--gray)"></span>Aberto</span>
+              <span class="val">1</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--gray)"></div></div>
+          </div>
+          <div>
+            <div class="status-row">
+              <span class="label"><span class="dot" style="background:var(--accent)"></span>Em atendimento</span>
+              <span class="val">5</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:62%; background:var(--accent)"></div></div>
+          </div>
+          <div>
+            <div class="status-row">
+              <span class="label"><span class="dot" style="background:var(--red)"></span>Aguardando retorno</span>
+              <span class="val">0</span>
+            </div>
+            <div class="empty-ok" style="margin-top:6px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>
+              Nenhum chamado parado
+            </div>
+          </div>
+          <div>
+            <div class="status-row">
+              <span class="label"><span class="dot" style="background:var(--amber)"></span>Retorno terceiro</span>
+              <span class="val">1</span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:12%; background:var(--amber)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="flex:1;">
+        <div class="panel-header">
+          <h2>Equipe</h2>
+        </div>
+        <div class="team-list">
+          <div class="team-row">
+            <span class="who">
+              <span class="team-avatar">AN</span>
+              <span class="name">Aluisio Nogueira</span>
+            </span>
+            <span class="val">3</span>
+          </div>
+          <div class="team-row">
+            <span class="who">
+              <span class="team-avatar">WN</span>
+              <span class="name">Wotyson Neves</span>
+            </span>
+            <span class="val">3</span>
+          </div>
+          <div class="team-row">
+            <span class="who">
+              <span class="team-avatar">VC</span>
+              <span class="name">Vinicius Cavalcante</span>
+            </span>
+            <span class="val">2</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="mark"><span class="live-dot"></span>Helpdesk T.I. · Grupo VDA</span>
+  <span class="update">Dados de exemplo · próxima atualização em 60s</span>
+</footer>
+
+</section>
+
+<section class="screen" id="screen-atividades">
+
+<header>
+  <div class="header-left">
+    <h1>Atividades T.I.</h1>
+    <p>Navecunha · Grupo VDA · Prioridades, atrasos e tarefas do dia</p>
+  </div>
+  <div class="clock">
+    <div class="time" id="clock-time-2">14:32</div>
+    <div class="date" id="clock-date-2">Terça, 30 de junho</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-icon gray">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5A5F7A" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M9 4v6"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Atividades abertas</div>
+        <div class="kpi-valor">50</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon" style="background:var(--red-bg)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#C0392B" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Atrasadas</div>
+        <div class="kpi-valor" style="color:var(--red)">17</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9A6500" stroke-width="2"><path d="M13 2 3 14h6l-1 8 10-12h-6z"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Alta · urgente</div>
+        <div class="kpi-valor">9</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon accent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Tag "pra hoje"</div>
+        <div class="kpi-valor">5</div>
+      </div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1A6B45" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <div>
+        <div class="kpi-label">Finalizado · mês</div>
+        <div class="kpi-valor">31</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-row" style="grid-template-columns: 1fr;">
+
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Prioridades e atrasos</h2>
+        <span class="count">19 itens · página <span id="atv-page-label">1</span>/4</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:100px;">Ticket</th>
+            <th>Assunto</th>
+            <th style="width:170px;">Responsável</th>
+            <th style="width:150px;">Status</th>
+            <th style="width:110px;">Venceu em</th>
+          </tr>
+        </thead>
+        <tbody id="atv-page-1">
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-392</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Indicador — operação fluvial<span class="tag-pill today">pra hoje</span></td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/05</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-372</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar view para indicadores de produção — OEE</td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/05</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-345</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar painel para controlar a ocupação de frotas</td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/05</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-340</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Identificar horas não produtivas da tripulação</td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/05</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-324</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Confrontar AFRMM do CargasWeb com lançado no Sankhya</td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/05</td>
+          </tr>
+        </tbody>
+        <tbody id="atv-page-2" style="display:none;">
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-944</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Criar procedimento para uso de IA corporativo</td>
+            <td>Aluisio Nogueira</td>
+            <td><span class="badge badge-aberto">Aberto</span></td>
+            <td class="aging crit">01/06</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-956</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Melhoria de processo — rodoviário V2</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">02/06</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-851</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Solicitação de criação de relatório de endividamento</td>
+            <td>Joshua Carvalho</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">11/06</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-939</td>
+            <td class="ticket-title"><span class="priority-dot priority-urgent"></span>Autoatendimento AMLABS — prestação de contas<span class="tag-pill today">pra hoje</span></td>
+            <td>Vinicius · Aluisio</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td class="aging crit">15/06</td>
+          </tr>
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-246</td>
+            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Controle de portaria</td>
+            <td>Aluisio · Vinicius</td>
+            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
+            <td class="aging crit">22/06</td>
+          </tr>
+        </tbody>
+        <tbody id="atv-page-3" style="display:none;">
+          <tr class="row-crit">
+            <td class="ticket-id">TICKET-234</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Envio de e-mail para cotação de fornecedores</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging crit">23/06</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-965</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Atualização de certificados digitais<span class="tag-pill">importante</span></td>
+            <td>Aluisio Nogueira</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td class="aging warn">25/06</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-963</td>
+            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Levantamento de material — almoxarifado</td>
+            <td>Aluisio Nogueira</td>
+            <td><span class="badge badge-andamento">Em andamento</span></td>
+            <td class="aging warn">26/06</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-368</td>
+            <td class="ticket-title"><span class="priority-dot priority-normal"></span>Bonificação | cashback — Gelocrim<span class="tag-pill">lembrete-1h</span></td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td class="aging warn">29/06</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-325</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Módulo de processo trabalhista — pessoal+</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
+            <td class="aging warn">29/06</td>
+          </tr>
+        </tbody>
+        <tbody id="atv-page-4" style="display:none;">
+          <tr>
+            <td class="ticket-id">TICKET-236</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Verificar o MANAD</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
+            <td class="aging warn">29/06</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-943</td>
+            <td class="ticket-title"><span class="priority-dot priority-high"></span>Migração de servidor — Datacom para 2COM<span class="tag-pill today">pra hoje</span></td>
+            <td>Aluisio · Edgard</td>
+            <td><span class="badge badge-ag-usuario">Ag. retorno usuário</span></td>
+            <td>03/07</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-928</td>
+            <td class="ticket-title"><span class="priority-dot priority-urgent"></span>Ajustar ICMS no faturamento — Gelo e Navecunha</td>
+            <td>Vinicius Cavalcante</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td>06/07</td>
+          </tr>
+          <tr>
+            <td class="ticket-id">TICKET-953</td>
+            <td class="ticket-title"><span class="priority-dot priority-none"></span>Dash consolidador — manutenção<span class="tag-pill today">pra hoje</span></td>
+            <td>Edgard Alecrim</td>
+            <td><span class="badge badge-pendente">Pendente</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="panel-footer">
+        <span class="page-dot-atv active" data-page="1"></span>
+        <span class="page-dot-atv" data-page="2"></span>
+        <span class="page-dot-atv" data-page="3"></span>
+        <span class="page-dot-atv" data-page="4"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span class="mark"><span class="live-dot"></span>Atividades T.I. · Grupo VDA</span>
+  <span class="update">Filtro: alta/urgente · pra hoje · atrasadas — dados de exemplo</span>
+</footer>
+
+</section>
+
+<script>
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const date = now.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+  const dateStr = date.charAt(0).toUpperCase() + date.slice(1);
+  ['clock-time','clock-time-2'].forEach(function(id){ const el = document.getElementById(id); if (el) el.textContent = time; });
+  ['clock-date','clock-date-2'].forEach(function(id){ const el = document.getElementById(id); if (el) el.textContent = dateStr; });
+}
+updateClock();
+setInterval(updateClock, 1000 * 30);
+
+function setupPagination(pageIds, dotSelector, intervalMs) {
+  const pages = pageIds.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  const dots = document.querySelectorAll(dotSelector);
+  if (pages.length <= 1) return;
+  let current = 0;
+  setInterval(function () {
+    pages[current].style.display = 'none';
+    if (dots[current]) dots[current].classList.remove('active');
+    current = (current + 1) % pages.length;
+    pages[current].style.display = '';
+    if (dots[current]) dots[current].classList.add('active');
+    const label = document.getElementById('atv-page-label');
+    if (label && pageIds[0].startsWith('atv')) label.textContent = current + 1;
+  }, intervalMs);
+}
+
+setupPagination(['queue-page-1','queue-page-2'], '.page-dot', 8000);
+setupPagination(['atv-page-1','atv-page-2','atv-page-3','atv-page-4'], '.page-dot-atv', 6000);
+
+(function () {
+  const screens = [
+    document.getElementById('screen-helpdesk'),
+    document.getElementById('screen-atividades')
+  ].filter(Boolean);
+  if (screens.length <= 1) return;
+  let current = 0;
+  setInterval(function () {
+    screens[current].classList.remove('active');
+    current = (current + 1) % screens.length;
+    screens[current].classList.add('active');
+  }, 15000);
+})();
+</script>
+
+</body>
+</html>
